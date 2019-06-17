@@ -1,0 +1,3 @@
+rootProject.name = 'reusable_components_webinar'
+
+include ':app'
