@@ -10,7 +10,7 @@ export default class App extends Component {
         <Button title="Click Me" color="blue" />
         <Button title="Click Me" color="green" />
         <Button title="Click Me" color="red" />
-        <Contact title="Sameeha Rahman" description="Software Engineering Trainee" image={{ source: require("./assets/images/Sameeha.jpg") }} />
+        <Contact name="Sameeha Rahman" role="Software Engineering Trainee" image={{ source: require("./assets/images/Sameeha.jpg") }} />
       </View>
     );
   }

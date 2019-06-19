@@ -6,8 +6,8 @@ export class Contact extends Component {
 
     render() {
         const {
-            title,
-            description,
+            name,
+            role,
             image,
             onPress,
             ...otherProps
@@ -28,9 +28,9 @@ export class Contact extends Component {
                     </View>
                 )}
                 <View style={styles.textContainer}>
-                    <Text style={styles.headerText}>{title}</Text>
-                    {description && (
-                        <Text style={styles.descriptionText} >{description}</Text>
+                    <Text style={styles.headerText}>{name}</Text>
+                    {role && (
+                        <Text style={styles.descriptionText} >{role}</Text>
                     )}
                 </View>
             </TouchableOpacity>
@@ -39,8 +39,8 @@ export class Contact extends Component {
 }
 
 Contact.propTypes = {
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    role: PropTypes.string,
     image: PropTypes.shape({
         ...Image.propTypes
     }),
