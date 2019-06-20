@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, StyleSheet, TouchableOpacity, Animated, Image, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import PropTypes from "prop-types";
 
 export class ExpandableListItem extends Component {
@@ -9,22 +9,7 @@ export class ExpandableListItem extends Component {
         this.state = {
             expanded: props.expanded
         };
-        this.fadeAnim = new Animated.Value(0);
     }
-
-    animate() {
-        this.fadeAnim = new Animated.Value(0);
-        Animated.timing(this.fadeAnim, {
-            toValue: 1,
-            duration: 250,
-            useNativeDriver: true
-        }).start();
-    }
-
-    handleShowHide = () => {
-        this.setState({ expanded: !this.state.expanded });
-        this.animate();
-    };
 
     render() {
         const { title, description, onPress, bodyColor, headerColor, ...otherProps } = this.props;
@@ -32,30 +17,23 @@ export class ExpandableListItem extends Component {
 
         const cardStyle = [styles.container, { borderColor: headerColor, borderWidth: 1 }];
         const headerStyle = [styles.titleContainer, { backgroundColor: headerColor }];
-        const bodyStyle = { ...styles.bodyContainer, backgroundColor: bodyColor };
+        const bodyStyle = [styles.bodyContainer, { backgroundColor: bodyColor }];
 
         return (
             <View style={cardStyle}>
-                <TouchableOpacity onPress={this.handleShowHide} style={headerStyle} {...otherProps}>
+                <TouchableOpacity onPress={() => this.setState({ expanded: !expanded })} style={headerStyle} {...otherProps}>
                     <Text style={styles.headerText}>{title}</Text>
-                    {this.renderIcon()}
+                    <Image
+                        style={styles.caretImage}
+                        source={expanded ? require("../assets/images/caret-up.png") : require("../assets/images/caret-down.png")}
+                    />
                 </TouchableOpacity>
                 {expanded && (
-                    <Animated.View style={[bodyStyle, { opacity: this.fadeAnim }]}>
+                    <View style={bodyStyle}>
                         <Text style={styles.descriptionText}>{description}</Text>
-                    </Animated.View>
+                    </View>
                 )}
             </View>
-        );
-    }
-
-    renderIcon() {
-        const { expanded } = this.state;
-        return (
-            <Image
-                style={styles.caretImage}
-                source={expanded ? require("../assets/images/caret-up.png") : require("../assets/images/caret-down.png")}
-            />
         );
     }
 }
@@ -102,6 +80,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontSize: 16,
         color: "rgba(33, 33, 33, 0.87)",
+        fontWeight: "bold",
         flex: 1
     },
     descriptionText: {
