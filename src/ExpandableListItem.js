@@ -11,6 +11,10 @@ export class ExpandableListItem extends Component {
         };
     }
 
+    handleShowHide = () => {
+        this.setState({ expanded: !this.state.expanded });
+    };
+
     render() {
         const { title, description, onPress, bodyColor, headerColor, ...otherProps } = this.props;
         const { expanded } = this.state;
@@ -21,7 +25,7 @@ export class ExpandableListItem extends Component {
 
         return (
             <View style={cardStyle}>
-                <TouchableOpacity onPress={() => this.setState({ expanded: !expanded })} style={headerStyle} {...otherProps}>
+                <TouchableOpacity onPress={this.handleShowHide} style={headerStyle} {...otherProps}>
                     <Text style={styles.headerText}>{title}</Text>
                     <Image
                         style={styles.caretImage}
