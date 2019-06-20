@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Button } from './src/Button';
 import { Contact } from './src/Contact';
+import { ExpandableListItem } from './src/ExpandableListItem';
 
 export default class App extends Component {
   render() {
@@ -11,6 +12,7 @@ export default class App extends Component {
         <Button title="Click Me" color="green" />
         <Button title="Click Me" color="red" />
         <Contact name="Sameeha Rahman" role="Software Engineering Trainee" image={{ source: require("./assets/images/Sameeha.jpg") }} />
+        <ExpandableListItem title="Heading" description="Description" />
       </View>
     );
   }
