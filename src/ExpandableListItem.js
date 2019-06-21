@@ -7,7 +7,7 @@ export class ExpandableListItem extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            expanded: props.expanded
+            expanded: false
         };
     }
 
@@ -53,7 +53,6 @@ ExpandableListItem.propTypes = {
     ]).isRequired,
     bodyColor: PropTypes.string,
     headerColor: PropTypes.string,
-    expanded: PropTypes.bool,
     ...TouchableOpacity.propTypes
 };
 

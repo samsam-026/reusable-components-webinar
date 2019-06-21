@@ -1,42 +1,34 @@
-import React, { Component } from "react";
+import React from "react";
 import { View, StyleSheet, TouchableOpacity, Image, Text } from "react-native";
 import PropTypes from "prop-types";
 
-export class Contact extends Component {
+export function Contact(props) {
+    const { name, role, image, onPress, ...otherProps } = props;
 
-    render() {
-        const {
-            name,
-            role,
-            image,
-            onPress,
-            ...otherProps
-        } = this.props;
+    const onListItemTap = onPress ? onPress : undefined;
 
-        const onListItemTap = onPress ? onPress : undefined;
-
-        return (
-            <TouchableOpacity
-                style={styles.container}
-                disabled={!onListItemTap}
-                onPress={onListItemTap}
-                {...otherProps}
-            >
-                {image && (
-                    <View style={styles.imageContainer}>
-                        <Image {...image} style={styles.image} />
-                    </View>
-                )}
-                <View style={styles.textContainer}>
-                    <Text style={styles.headerText}>{name}</Text>
-                    {role && (
-                        <Text style={styles.descriptionText} >{role}</Text>
-                    )}
+    return (
+        <TouchableOpacity
+            style={styles.container}
+            disabled={!onListItemTap}
+            onPress={onListItemTap}
+            {...otherProps}
+        >
+            {image && (
+                <View style={styles.imageContainer}>
+                    <Image {...image} style={styles.image} />
                 </View>
-            </TouchableOpacity>
-        );
-    }
+            )}
+            <View style={styles.textContainer}>
+                <Text style={styles.headerText}>{name}</Text>
+                {role && (
+                    <Text style={styles.descriptionText} >{role}</Text>
+                )}
+            </View>
+        </TouchableOpacity>
+    );
 }
+
 
 Contact.propTypes = {
     name: PropTypes.string.isRequired,
@@ -50,7 +42,7 @@ Contact.propTypes = {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
-        paddingRight: 5,
+        padding: 5,
         borderWidth: 0.5,
         borderColor: "rgba(33, 33, 33, 0.4)",
         backgroundColor: "#FFF",
